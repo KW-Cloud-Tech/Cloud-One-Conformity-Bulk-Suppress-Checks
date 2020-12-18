@@ -157,23 +157,23 @@ def main ():
 	CC_FILTER_TAGS = args.filter_tags    
 
     # Pass arguments in to API call
-    url = "https://" + CC_REGION + "-api.cloudconformity.com/v1/checks"
+	url = "https://" + CC_REGION + "-api.cloudconformity.com/v1/checks"
 	params = {
-	    "accountIds": CC_ACCOUNTIDS,
-	    "filter[categories]": CC_FILTER_CATEGORIES,
-	    "filter[compliances]": CC_FILTER_COMPLIANCES,
-	    "filter[newerThanDays]": CC_FILTER_NEWERTHANDAYS,
-	    "filter[olderThanDays]": CC_FILTER_OLDERTHANDAYS,
-	    "filter[regions]": CC_FILTER_REGIONS,
-	    "filter[riskLevels]": CC_FILTER_RISKLEVELS,
-	    "filter[ruleIds]": CC_FILTER_RULEIDS,
-	    "filter[services]": CC_FILTER_SERVICES,
-	    "filter[tags]": CC_FILTER_TAGS,
-	    "filter[statuses]": CC_FILTER_STATUSES,
-	    "filter[suppressed]": CC_FILTER_SUPPRESSED,
-	    "filter[suppressedFilterMode]": CC_FILTER_SUPPRESSEDFILTERMODE,
-	    "page[size]": CC_PAGESIZE,
-	    "page[number]": CC_PAGENUMBER,
+		"accountIds": CC_ACCOUNTIDS,
+		"filter[categories]": CC_FILTER_CATEGORIES,
+		"filter[compliances]": CC_FILTER_COMPLIANCES,
+		"filter[newerThanDays]": CC_FILTER_NEWERTHANDAYS,
+		"filter[olderThanDays]": CC_FILTER_OLDERTHANDAYS,
+		"filter[regions]": CC_FILTER_REGIONS,
+		"filter[riskLevels]": CC_FILTER_RISKLEVELS,
+		"filter[ruleIds]": CC_FILTER_RULEIDS,
+		"filter[services]": CC_FILTER_SERVICES,
+		"filter[tags]": CC_FILTER_TAGS,
+		"filter[statuses]": CC_FILTER_STATUSES,
+		"filter[suppressed]": CC_FILTER_SUPPRESSED,
+		"filter[suppressedFilterMode]": CC_FILTER_SUPPRESSEDFILTERMODE,
+		"page[size]": CC_PAGESIZE,
+		"page[number]": CC_PAGENUMBER,
 	}
 
     payload = {}
