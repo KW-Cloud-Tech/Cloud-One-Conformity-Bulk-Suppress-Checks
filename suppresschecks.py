@@ -140,9 +140,9 @@ def main ():
 	CC_REGION = args.region
 	CC_APIKEY = args.api_key
 	CC_ACCOUNTIDS = args.account_ids
-	CC_PAGESIZE = int(os.environ.get("CC_PAGESIZE", 1000))
-	CC_PAGENUMBER = int(os.environ.get("CC_PAGENUMBER", 0))
-	CC_SUPPRESSION_NOTE = os.environ.get("CC_SUPPRESSION_NOTE", "Bulk Suppression Script")
+	CC_PAGESIZE = args.page_size
+	CC_PAGENUMBER = args.page_number
+	CC_SUPPRESSION_NOTE = args.suppression_note
 	CC_FILTER_CATEGORIES = args.filter_categories
 	CC_FILTER_COMPLIANCES = args.filter_coimpliances
 	CC_FILTER_NEWERTHANDAYS = args.filter_newerthandays
