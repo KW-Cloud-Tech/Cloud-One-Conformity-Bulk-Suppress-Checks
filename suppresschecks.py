@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument(
         "-sn",
         "--suppression_note",
-        default="Bulk Suppression Script,
+        default="Bulk Suppression Script",
         required=False,
         help="Add a note to the rule configuration change",
     )    
