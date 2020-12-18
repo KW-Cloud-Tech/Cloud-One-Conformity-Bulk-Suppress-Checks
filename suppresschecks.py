@@ -6,9 +6,9 @@ import requests
 def parse_args():
     parser = argparse.ArgumentParser(
         description="""Creates a new Conformity profile file from an 
-						existing profile, and removes unconfigured rules.""",
+                        existing profile, and removes unconfigured rules.""",
     )
-    
+
     # Conformity Region, API Key & Target Account(s) variables (when inputting multiple accounts comma delimit)
     parser.add_argument(
         "-r",
@@ -30,7 +30,7 @@ def parse_args():
         required=True,
         help="list of comma separated Conformity account ids",
     )
-    
+
     # Pagination variables
     parser.add_argument(
         "-ps",
@@ -46,7 +46,7 @@ def parse_args():
         required=False,
         help="define the page number of the response to return, defaults to 0",
     )
-    
+
     # Suppression note to add
     parser.add_argument(
         "-sn",
@@ -55,7 +55,7 @@ def parse_args():
         required=False,
         help="Add a note to the rule configuration change",
     )    
-    
+
     # Checks API Filters
     parser.add_argument(
         "-cat",
@@ -130,51 +130,51 @@ def parse_args():
         help="Filter checks based on tags",
     ) 
 
-	return parser.parse_args()
-    
+    return parser.parse_args()
+
 def main ():
         
-	args = parse_args()
+    args = parse_args()
 
-	# Set variables
-	CC_REGION = args.region
-	CC_APIKEY = args.api_key
-	CC_ACCOUNTIDS = args.account_ids
-	CC_PAGESIZE = args.page_size
-	CC_PAGENUMBER = args.page_number
-	CC_SUPPRESSION_NOTE = args.suppression_note
-	CC_FILTER_CATEGORIES = args.filter_categories
-	CC_FILTER_COMPLIANCES = args.filter_coimpliances
-	CC_FILTER_NEWERTHANDAYS = args.filter_newerthandays
-	CC_FILTER_OLDERTHANDAYS = args.filter_olderthandays
-	CC_FILTER_REGIONS = args.filter_regions
-	CC_FILTER_RISKLEVELS = args.filter_risklevels
-	CC_FILTER_RULEIDS = args.filter_ruleids
-	CC_FILTER_SERVICES = args.filter_services
-	CC_FILTER_STATUSES = args.filter_statuses
-	CC_FILTER_SUPPRESSED = args.filter_suppressed
-	CC_FILTER_SUPPRESSEDFILTERMODE = args.filter_suppressedfiltermode
-	CC_FILTER_TAGS = args.filter_tags    
+    # Set variables
+    CC_REGION = args.region
+    CC_APIKEY = args.api_key
+    CC_ACCOUNTIDS = args.account_ids
+    CC_PAGESIZE = args.page_size
+    CC_PAGENUMBER = args.page_number
+    CC_SUPPRESSION_NOTE = args.suppression_note
+    CC_FILTER_CATEGORIES = args.filter_categories
+    CC_FILTER_COMPLIANCES = args.filter_coimpliances
+    CC_FILTER_NEWERTHANDAYS = args.filter_newerthandays
+    CC_FILTER_OLDERTHANDAYS = args.filter_olderthandays
+    CC_FILTER_REGIONS = args.filter_regions
+    CC_FILTER_RISKLEVELS = args.filter_risklevels
+    CC_FILTER_RULEIDS = args.filter_ruleids
+    CC_FILTER_SERVICES = args.filter_services
+    CC_FILTER_STATUSES = args.filter_statuses
+    CC_FILTER_SUPPRESSED = args.filter_suppressed
+    CC_FILTER_SUPPRESSEDFILTERMODE = args.filter_suppressedfiltermode
+    CC_FILTER_TAGS = args.filter_tags    
 
     # Pass arguments in to API call
-	url = "https://" + CC_REGION + "-api.cloudconformity.com/v1/checks"
-	params = {
-		"accountIds": CC_ACCOUNTIDS,
-		"filter[categories]": CC_FILTER_CATEGORIES,
-		"filter[compliances]": CC_FILTER_COMPLIANCES,
-		"filter[newerThanDays]": CC_FILTER_NEWERTHANDAYS,
-		"filter[olderThanDays]": CC_FILTER_OLDERTHANDAYS,
-		"filter[regions]": CC_FILTER_REGIONS,
-		"filter[riskLevels]": CC_FILTER_RISKLEVELS,
-		"filter[ruleIds]": CC_FILTER_RULEIDS,
-		"filter[services]": CC_FILTER_SERVICES,
-		"filter[tags]": CC_FILTER_TAGS,
-		"filter[statuses]": CC_FILTER_STATUSES,
-		"filter[suppressed]": CC_FILTER_SUPPRESSED,
-		"filter[suppressedFilterMode]": CC_FILTER_SUPPRESSEDFILTERMODE,
-		"page[size]": CC_PAGESIZE,
-		"page[number]": CC_PAGENUMBER,
-	}
+    url = "https://" + CC_REGION + "-api.cloudconformity.com/v1/checks"
+    params = {
+        "accountIds": CC_ACCOUNTIDS,
+        "filter[categories]": CC_FILTER_CATEGORIES,
+        "filter[compliances]": CC_FILTER_COMPLIANCES,
+        "filter[newerThanDays]": CC_FILTER_NEWERTHANDAYS,
+        "filter[olderThanDays]": CC_FILTER_OLDERTHANDAYS,
+        "filter[regions]": CC_FILTER_REGIONS,
+        "filter[riskLevels]": CC_FILTER_RISKLEVELS,
+        "filter[ruleIds]": CC_FILTER_RULEIDS,
+        "filter[services]": CC_FILTER_SERVICES,
+        "filter[tags]": CC_FILTER_TAGS,
+        "filter[statuses]": CC_FILTER_STATUSES,
+        "filter[suppressed]": CC_FILTER_SUPPRESSED,
+        "filter[suppressedFilterMode]": CC_FILTER_SUPPRESSEDFILTERMODE,
+        "page[size]": CC_PAGESIZE,
+        "page[number]": CC_PAGENUMBER,
+    }
 
     payload = {}
     headers = {
@@ -185,7 +185,7 @@ def main ():
     session = requests.session()    
     
     def get_account_checks():
-
+        
         combined = []
         counter = 0
         max_results = 1
