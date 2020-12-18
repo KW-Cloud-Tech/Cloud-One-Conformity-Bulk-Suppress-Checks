@@ -130,36 +130,56 @@ def parse_args():
         help="Filter checks based on tags",
     ) 
 
-    return parser.parse_args()
+	return parser.parse_args()
     
 def main ():
         
-    args = parse_args()
+	args = parse_args()
+
+	# Set variables
+	CC_REGION = args.region
+	CC_APIKEY = args.api_key
+	CC_ACCOUNTIDS = args.account_ids
+	CC_PAGESIZE = int(os.environ.get("CC_PAGESIZE", 1000))
+	CC_PAGENUMBER = int(os.environ.get("CC_PAGENUMBER", 0))
+	CC_SUPPRESSION_NOTE = os.environ.get("CC_SUPPRESSION_NOTE", "Bulk Suppression Script")
+	CC_FILTER_CATEGORIES = args.filter_categories
+	CC_FILTER_COMPLIANCES = args.filter_coimpliances
+	CC_FILTER_NEWERTHANDAYS = args.filter_newerthandays
+	CC_FILTER_OLDERTHANDAYS = args.filter_olderthandays
+	CC_FILTER_REGIONS = args.filter_regions
+	CC_FILTER_RISKLEVELS = args.filter_risklevels
+	CC_FILTER_RULEIDS = args.filter_ruleids
+	CC_FILTER_SERVICES = args.filter_services
+	CC_FILTER_STATUSES = args.filter_statuses
+	CC_FILTER_SUPPRESSED = args.filter_suppressed
+	CC_FILTER_SUPPRESSEDFILTERMODE = args.filter_suppressedfiltermode
+	CC_FILTER_TAGS = args.filter_tags    
 
     # Pass arguments in to API call
-    url = "https://" + args.region + "-api.cloudconformity.com/v1/checks"
-    params = {
-        "accountIds": args.account_ids,
-        "filter[categories]": args.filter_categories,
-        "filter[compliances]": args.filter_coimpliances,
-        "filter[newerThanDays]": args.filter_newerthandays,
-        "filter[olderThanDays]": args.filter_olderthandays,
-        "filter[regions]": args.filter_regions,
-        "filter[riskLevels]": args.filter_risklevels,
-        "filter[ruleIds]": args.filter_ruleids,
-        "filter[services]": args.filter_services,
-        "filter[tags]": args.filter_tags,
-        "filter[statuses]": args.filter_statuses,
-        "filter[suppressed]": args.filter_suppressed,
-        "filter[suppressedFilterMode]": args.filter_suppressedfiltermode,
-        "page[size]": args.page_size,
-        "page[number]": args.page_number,
-    }
+    url = "https://" + CC_REGION + "-api.cloudconformity.com/v1/checks"
+	params = {
+	    "accountIds": CC_ACCOUNTIDS,
+	    "filter[categories]": CC_FILTER_CATEGORIES,
+	    "filter[compliances]": CC_FILTER_COMPLIANCES,
+	    "filter[newerThanDays]": CC_FILTER_NEWERTHANDAYS,
+	    "filter[olderThanDays]": CC_FILTER_OLDERTHANDAYS,
+	    "filter[regions]": CC_FILTER_REGIONS,
+	    "filter[riskLevels]": CC_FILTER_RISKLEVELS,
+	    "filter[ruleIds]": CC_FILTER_RULEIDS,
+	    "filter[services]": CC_FILTER_SERVICES,
+	    "filter[tags]": CC_FILTER_TAGS,
+	    "filter[statuses]": CC_FILTER_STATUSES,
+	    "filter[suppressed]": CC_FILTER_SUPPRESSED,
+	    "filter[suppressedFilterMode]": CC_FILTER_SUPPRESSEDFILTERMODE,
+	    "page[size]": CC_PAGESIZE,
+	    "page[number]": CC_PAGENUMBER,
+	}
 
     payload = {}
     headers = {
         "Content-Type": "application/vnd.api+json",
-        "Authorization": "ApiKey " + args.api_key,
+        "Authorization": "ApiKey " + CC_APIKEY,
     }
 
     session = requests.session()    
@@ -172,7 +192,7 @@ def main ():
         while counter <= max_results:
             page = session.get(url, params=params, headers=headers, data=payload).json()
             max_results = page["meta"]["total"]
-            counter += args.page_size
+            counter += CC_PAGESIZE
             params["page[number]"] += 1
             data = page["data"]
             combined += data
@@ -188,7 +208,7 @@ def main ():
                 "type": "checks",
                 "attributes": {"suppressed": True, "suppressed-until": None},
             },
-            "meta": {"note": args.suppression_note},
+            "meta": {"note": CC_SUPPRESSION_NOTE},
         }
         jsonbody = json.dumps(suppressbody)
         suppress = session.patch(checkurl, headers=headers, data=jsonbody)
